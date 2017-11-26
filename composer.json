@@ -1,0 +1,17 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Payroll\\": "src/",
+            "Payroll\\Infrastructure\\": "src/infrastructure",
+            "Payroll\\Script\\": "src/script"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Payroll\\": "test/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "6.0.*"
+    }
+}
