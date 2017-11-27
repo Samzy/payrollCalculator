@@ -5,6 +5,9 @@ namespace Payroll;
 
 class PayrollDateCalculator
 {
+    /*
+     * @var String
+     */
     private $paymentYear;
 
     /*
@@ -12,6 +15,9 @@ class PayrollDateCalculator
      */
     private $paymentDate;
 
+    /*
+     * @var Array
+     */
     private $dates;
 
     public function __construct($paymentYear, $locale)
@@ -56,7 +62,7 @@ class PayrollDateCalculator
         $lastDayOfMonth->modify('last day of this month');
 
         if ($lastDayOfMonth->format('N') == 6 || $lastDayOfMonth->format('N') == 7) {
-            $this->dates[] =  $this->calculateLastWorkingDay($lastDayOfMonth);
+            $this->dates[] = $this->calculateLastWorkingDay($lastDayOfMonth);
         } else {
             $this->dates[] = $lastDayOfMonth->format('Y-m-d');
         }
