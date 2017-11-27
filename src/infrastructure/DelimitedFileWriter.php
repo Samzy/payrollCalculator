@@ -52,4 +52,12 @@ class DelimitedFileWriter implements FileWriterInterface
 
         return true;
     }
+
+    /**
+     * @return string
+     */
+    public function getFileName()
+    {
+        return $this->fileName;
+    }
 }

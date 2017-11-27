@@ -5,18 +5,18 @@ namespace Payroll;
 
 class PayrollDateCalculator
 {
-    /*
+    /**
      * @var String
      */
     private $paymentYear;
 
-    /*
-     * @var DateTime
+    /**
+     * @var \DateTime
      */
     private $paymentDate;
 
-    /*
-     * @var Array
+    /**
+     * @var array
      */
     private $dates;
 
@@ -25,6 +25,10 @@ class PayrollDateCalculator
         $this->paymentYear = $paymentYear;
     }
 
+    /**
+     * @param $month
+     * @return array
+     */
     public function getPaymentDates($month): array
     {
 
@@ -33,13 +37,13 @@ class PayrollDateCalculator
         //if we were localising the dates we would use the datetime localisation set in the constructor
 
         $this->dates[] = $this->paymentDate->format('F');
-        $this->getExpensesDates();
-        $this->getSalaryDate();
+        $this->appendExpensesDates();
+        $this->appendSalaryDate();
 
         return $this->dates;
     }
 
-    private function getExpensesDates()
+    private function appendExpensesDates()
     {
         if ($this->paymentDate->format('N') == 6 || $this->paymentDate->format('N') == 7) {
             $this->dates[] = $this->calculateNextMonday();
@@ -56,7 +60,7 @@ class PayrollDateCalculator
         }
     }
 
-    private function getSalaryDate()
+    private function appendSalaryDate()
     {
         $lastDayOfMonth = new \DateTime($this->paymentDate->format('Y-m-d'));
         $lastDayOfMonth->modify('last day of this month');
@@ -68,6 +72,9 @@ class PayrollDateCalculator
         }
     }
 
+    /**
+     * @return string
+     */
     private function calculateNextMonday(): string
     {
         if ($this->paymentDate->format('N') == 6) {
@@ -82,9 +89,13 @@ class PayrollDateCalculator
             return $nextMonday->format('Y-m-d');
         }
 
-        return 0;
+        return '1970-01-01';
     }
 
+    /**
+     * @param \DateTime $lastDayOfMonth
+     * @return string
+     */
     private function calculateLastWorkingDay($lastDayOfMonth): string
     {
         if ($lastDayOfMonth->format('N') == 6) {
@@ -97,6 +108,6 @@ class PayrollDateCalculator
             return $lastDayOfMonth->format('Y-m-d');
         }
 
-        return 0;
+        return '1970-01-01';
     }
 }
