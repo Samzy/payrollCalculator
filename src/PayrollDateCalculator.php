@@ -16,7 +16,7 @@ class PayrollDateCalculator
     private $paymentDate;
 
     /**
-     * @var array
+     * @var arrays
      */
     private $dates;
 
